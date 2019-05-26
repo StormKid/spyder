@@ -1,10 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { GetModule } from './get/get.module';
+import { PostModule } from './post/post.module';
+import { MonconfigService } from './monconfig/monconfig.service';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    GetModule,
+    PostModule,
+    MongooseModule.forRootAsync({ useClass: MonconfigService }),
+  ],
+  providers: [MonconfigService],
 })
 export class AppModule {}
